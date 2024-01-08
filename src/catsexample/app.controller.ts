@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { CatService } from './app.service'; // aca recuperamos el servicio de Cat mediante el import, 
+import { CatService } from './app.service';
 
 @Controller()
 export class AppController {
