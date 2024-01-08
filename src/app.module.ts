@@ -9,24 +9,26 @@ import { CatService } from './app.service';
 })
 export class AppModule {}
 
-/* si quisieramos usar un objeto de mock en lugar , este es un ejemplo pensado para hacer un test!
+/* si quisieramos usar un objeto de mock en lugar del servicio, este es un ejemplo pensado para hacer un test!
 const mockCatsService = {
    mock implementacion aca
   ...
 };
 @Module({
-  imports: [CatsModule], // esto importa el modulo de Cat entero!! este es el modulo general
+  imports: [CatsModule], // esto importa el modulo de Cat entero!! esto es el modulo global
   providers: [
     {
       provide: CatsService,
-      useValue: mockCatsService, // aca usamos el useValue que es usar CatService para testing
+      useValue: mockCatsService, // aca usamos el USEVALUE que es usar CatService directamente para testing
     },
   ],
 })
 export class AppModule {}
 */
 /*
-si quisieramos usar dinamicamente una clase , debemos usar useClass
+si quisieramos usar dinamicamente una clase , debemos usar useClass, esto esta pensado para ejecutar el servicio en un entorno u otro.(prueba o el real)
+la diferencia con el ejemplo anterior es que con usevalue mockeamos directamente a cat service , aca se ejecutara el servicio en un entorno de prueba o el real
+dependiendo de lo que useClass establezca dinamicamente para la clase
 const configServiceProvider = {
   provide: ConfigService,
   useClass:
