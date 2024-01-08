@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { CatService } from './app.service';
 
+// este modulo de gatos es el de App, en realidad deberia crear uno e importar alli modulo de gatos y perros, pero los dos modulos son ejemplos asi que lo dejamos asi por ahora
 @Module({
   imports: [],
   controllers: [AppController],
