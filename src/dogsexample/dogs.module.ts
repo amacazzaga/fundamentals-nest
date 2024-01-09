@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { DogService } from './dogsservice';
 import { DogController } from './dogscontroller';
 import { Dependencia1 } from './options/dogsprovider';
+import { ConfigModule } from './config/configmodule'; // mi modulo de configuracion
 
 // simulamos tener un servicio aca, mas tarde debera estar en el dogsservice
 class ExampleServiceOfDogs {
@@ -27,7 +28,7 @@ const exampleOfCustomProviderWithDogDependency = {
 
 //
 @Module({
-  imports: [],
+  imports: [ConfigModule.register()], // aca se importa el modulo de config, el register : pasar argumentos al método y utilizarlos para personalizar la configuración del módulo.
   controllers: [DogController],
   providers: [exampleOfCustomProviderWithDogDependency, DogService],
   exports: [exampleOfCustomProviderWithDogDependency], //ejemplo de como podemos exportar un custom provider
