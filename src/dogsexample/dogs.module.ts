@@ -15,7 +15,8 @@ class ExampleServiceOfDogs {
 const exampleOfCustomProviderWithDogDependency = {
   provide: ExampleServiceOfDogs,
   useFactory: (dependencia: Dependencia1) => {
-    // inyect especifica las dependecias que se pasan a esta funcion
+    //podriamos hacer este provider asincrono usando async await en esta funcion (await ... dependencia.getHello())
+    // inyect especifica las dependecias que se pasan a esta funcion de useFactory()
     return new ExampleServiceOfDogs(dependencia.getHello()); // Dependencia 1 , nos saludan muchos perros
   },
   inject: [
@@ -28,7 +29,7 @@ const exampleOfCustomProviderWithDogDependency = {
 @Module({
   imports: [],
   controllers: [DogController],
-  providers: [exampleOfCustomProviderWithDogDependency,DogService],
-  exports:[exampleOfCustomProviderWithDogDependency] //ejemplo de como podemos exportar un custom provider
+  providers: [exampleOfCustomProviderWithDogDependency, DogService],
+  exports: [exampleOfCustomProviderWithDogDependency], //ejemplo de como podemos exportar un custom provider
 })
 export class DogAppModule {}
