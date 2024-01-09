@@ -1,26 +1,33 @@
 import { Module } from '@nestjs/common';
 import { DogService } from './dogsservice';
 import { DogController } from './dogscontroller';
+import { Dependencia1 } from './options/dogsprovider';
 
 // simulamos tener un servicio aca, mas tarde debera estar en el dogsservice
 class ExampleServiceOfDogs {
-    constructor(private readonly options: string) {}
-    getHello(): string {
-      return `Hello from ExampleService of the dogs  with options: ${this.options}`;
-    }
+  constructor(private readonly options: string) {}
+  getHello(): string {
+    return `Hello from ExampleService of the dogs  with options: ${this.options}`;
   }
- // nuestro provider recupera el servicio de dogs provide: exampleserviceofdogs
-  const exampleProvider = {
-    provide: ExampleServiceOfDogs,
-    useFactory: (options: string) => { // cumplir con el mandatory que dice la docu 
-      return new ExampleServiceOfDogs(options);
-    },
-    inject: [""], //Las dependencias necesarias para la creación de esta instancia se especifican en el array inject
-  };
-  //
+}
+// crearemos un custom provider dependiendo de lo que la funcion useFactory nos devuelva!!!
+// nuestro provider recupera el servicio de dogs provide: exampleserviceofdogs
+const exampleOfCustomProviderWithDogDependency = {
+  provide: ExampleServiceOfDogs,
+  useFactory: (dependencia: Dependencia1) => {
+    // inyect especifica las dependecias que se pasan a esta funcion
+    return new ExampleServiceOfDogs(dependencia.getHello()); // Dependencia 1 , nos saludan muchos perros
+  },
+  inject: [
+    Dependencia1, // ver la dependencia el el archivo de options/dogsprovider
+    'dependencia dos podria ser opcional, si se viera asi : { token: SomeOptionalProvider, optional: true }', // seria recibida en useFactory
+  ], //Las dependencias necesarias para la creación de esta instancia se especifican en el array inject, instancia que se pasa a la funcion useFactory
+};
+
+//
 @Module({
   imports: [],
   controllers: [DogController],
-  providers: [DogService], 
+  providers: [exampleOfCustomProviderWithDogDependency,DogService],
 })
 export class DogAppModule {}
