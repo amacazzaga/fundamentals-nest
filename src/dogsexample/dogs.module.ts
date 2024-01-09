@@ -29,5 +29,6 @@ const exampleOfCustomProviderWithDogDependency = {
   imports: [],
   controllers: [DogController],
   providers: [exampleOfCustomProviderWithDogDependency,DogService],
+  exports:[exampleOfCustomProviderWithDogDependency] //ejemplo de como podemos exportar un custom provider
 })
 export class DogAppModule {}
