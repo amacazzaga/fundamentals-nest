@@ -4,7 +4,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 
 @Module({})
 export class ConfigModule {
-  static register(): DynamicModule {
+  static register(): DynamicModule { // aca se configura ese register
     return {
       module: ConfigModule,
       // providers: [ConfigService],

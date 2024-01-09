@@ -28,7 +28,7 @@ const exampleOfCustomProviderWithDogDependency = {
 
 //
 @Module({
-  imports: [ConfigModule.register()], // aca se importa el modulo de config, el register : pasar argumentos al método y utilizarlos para personalizar la configuración del módulo.
+  imports: [ConfigModule.register()], // aca se importa el modulo de config, el register : pasar argumentos al método  y utilizarlos para personalizar la configuración del módulo.
   controllers: [DogController],
   providers: [exampleOfCustomProviderWithDogDependency, DogService],
   exports: [exampleOfCustomProviderWithDogDependency], //ejemplo de como podemos exportar un custom provider
